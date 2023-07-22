@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<!-- Designined by CodingLab - youtube.com/codinglabyt -->
+<html lang="fa" dir="rtl">
+  <head>
+    <meta charset="UTF-8">
+    <title> ثبت نام</title>
+    <link rel="stylesheet" href="{% static 'assets/css/style2.css' %}">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+
+  <div class="container">
+    <div class="title">ثبت نام</div>
+    <div class="content">
+      <form method="post" >
+        {% csrf_token %}
+        <div class="user-details">
+          
+          <div class="input-box">
+            <span class="details">نام کاربری</span>
+           {{form.username}}
+            <h6>****************</h6>
+            <h6>  ضروری. 150 کاراکتر یا کمتر. فقط حروف، ارقام و @/./+/-/_.</h6>
+        </div>
+          <div class="input-box">
+            <span class="details">ایمیل</span>
+          {{form.email}}
+          </div>
+          <div class="input-box">
+            <span class="details">شماره تماس</span>
+            {{form.id_call}}
+          </div>
+          <div class="input-box">
+            <span class="details">رمز عبور</span>
+           {{form.password1}}
+            <h6>****************</h6>
+            <ul>
+            <h6>گذرواژه شما نمی‌تواند خیلی شبیه سایر اطلاعات شخصی شما باشد * .</h6>
+            <h6>گذرواژه شما باید حداقل 8 نویسه داشته باشد * .</h6>
+            <h6>گذرواژه شما نمی‌تواند رمز عبور رایجی باشد که استفاده می‌کنید *  .</h6>
+            <h6>گذرواژه شما نمی تواند کاملاً عددی باشد * .</h6></ul>
+        </div>
+
+          <div class="input-box">
+            <span class="details">تکرار رمز عبور</span>
+            {{form.password2}}
+          </div>
+        </div>
+        
+        <div class="button">
+          <input type="submit" value="ثبت نام">
+        </div>
+      </form>
+
+        {% if messages %}
+            {% for message in    messages  %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    </div>
+  </div>
+
+</body>
+</html>

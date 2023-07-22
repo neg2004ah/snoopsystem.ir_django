@@ -1,0 +1,78 @@
+{% extends 'inherit/base.html' %}
+{% load static %}
+{% load humanize %}
+{% block 'title' %}SNOOP product detail{% endblock 'title' %}
+{% block 'content' %}
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+      <div class="container">
+
+        <ol>
+          <li><a href="{% url 'home:home'%}">خانه</a></li>
+          <li>مشخصات محصول</li>
+        </ol>
+        <h2>مشخصات محصول</h2>
+
+      </div>
+    </section><!-- End Breadcrumbs -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
+
+        <div class="row gy-4">
+        
+          <div class="col-lg-8">
+            <div class="portfolio-details-slider swiper">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="{{products.image1.url}}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="{{products.image2.url}}" alt="">
+                </div>
+
+                <div class="swiper-slide">
+                  <img src="{{products.image3.url}}" alt="">
+                </div>
+
+              </div>
+              <div class="swiper-pagination"></div>
+            </div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="portfolio-info">
+              <h3>{{products.title}}</h3>
+              <ul>
+                {% for cat in post.category.all %}
+                <li><strong>دسته بندی</strong>: {{cat.name}}</li>
+                {% endfor %}
+                <li><strong>برند</strong>: {{products.client}}</li>
+                <li><strong>تاریخ</strong>: {{products.published_date|naturaltime}}</li>
+                
+              </ul>
+            </div>
+            <div class="portfolio-description">
+              <h2>{{products.title}}</h2>
+              <p>
+                {{products.content}}
+              </p>
+            </div>
+          </div>
+          
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+
+  </main><!-- End #main -->
+
+{% endblock 'content'%}
+
+ 
