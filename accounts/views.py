@@ -21,16 +21,6 @@ def Login(request) :
         if captcha.is_valid():
             mobile = request.POST.get('mobile')
             password = request.POST.get('password')
-            
-            if '@' in mobile:
-                try:
-                    user = CustomUser.objects.get(email=mobile)
-                    mobile = user.mobile
-
-                except CustomUser.DoesNotExist:
-                    messages.add_message(request, messages.ERROR , "کاربری با این ایمیل / نام کاربری یافت نشد")
-                    return redirect('accounts:login')
-                
                 
             user = authenticate(request, mobile=mobile, password=password)
             
