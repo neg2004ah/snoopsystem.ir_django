@@ -19,10 +19,21 @@ def Login(request) :
         captcha = CaptchaForm(request.POST)
         
         if captcha.is_valid():
-            mobile = request.POST.get('mobile')
+            username = request.POST.get('username')
             password = request.POST.get('password')
+            
+            if '@' in username:
+                try:
+                    user = CustomUser.objects.get(email=username)
+                    username = user.username
+
+                except CustomUser.DoesNotExist:
+                    messages.add_message(request, messages.ERROR , "کاربری با این ایمیل / نام کاربری یافت نشد")
+                    return redirect('accounts:login') 
                 
-            user = authenticate(request, mobile=mobile, password=password)
+
+
+            user = authenticate(request, username=username, password=password)
             
             if user is not None:
                 login(request, user)
